@@ -172,12 +172,19 @@
     <ClInclude Include="..\..\dependencies\xecs\src\xecs_tools.h" />
     <ClInclude Include="..\..\dependencies\xecs\src\xecs_tools_bits.h" />
     <ClInclude Include="..\..\src\Components.h" />
+    <ClInclude Include="..\..\src\Events.h" />
     <ClInclude Include="..\..\src\Game.h" />
     <ClInclude Include="..\..\src\GlutPrint.h" />
     <ClInclude Include="..\..\src\Grid.h" />
     <ClInclude Include="..\..\src\GridCells.h" />
     <ClInclude Include="..\..\src\Helper.h" />
+    <ClInclude Include="..\..\src\InputSystem.h" />
     <ClInclude Include="..\..\src\KeyInputs.h" />
+    <ClInclude Include="..\..\src\OnKeyboardTriggeredEvent.h" />
+    <ClInclude Include="..\..\src\OnKeyboardTriggerUpEvent.h" />
+    <ClInclude Include="..\..\src\PlayerOnKeyDownSystem.h" />
+    <ClInclude Include="..\..\src\PlayerOnKeyUpSystem.h" />
+    <ClInclude Include="..\..\src\PlayerTag.h" />
     <ClInclude Include="..\..\src\Position.h" />
     <ClInclude Include="..\..\src\RenderingGridSystem.h" />
     <ClInclude Include="..\..\src\RenderingInfo.h" />
@@ -188,6 +195,8 @@
     <ClInclude Include="..\..\src\Settings\xcore_user_settings.h" />
     <ClInclude Include="..\..\src\Systems.h" />
     <ClInclude Include="..\..\src\Timer.h" />
+    <ClInclude Include="..\..\src\UpdateMovementSystem.h" />
+    <ClInclude Include="..\..\src\UpdateTimerSystem.h" />
     <ClInclude Include="..\..\src\Velocity.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

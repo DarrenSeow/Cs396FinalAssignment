@@ -11,28 +11,44 @@ struct RenderingShipSystem : xecs::system::instance
 
     using query = std::tuple
         <
-        xecs::query::one_of<entity>
+        xecs::query::one_of<entity>,
+        xecs::query::must<PlayerTag>
         >;
 
     void OnPreUpdate(void) noexcept
     {
-        glBegin(GL_QUADS);
+       // glBegin(GL_TRIANGLES);
     }
 
     void OnPostUpdate(void) noexcept
     {
-        glEnd();
+       // glEnd();
     }
 
-    void operator()(const entity& _entity, const Position& _position, const Timer* _timer) const noexcept
+    void operator()(const entity& _entity, const Position& _position,const Scale& _scale, const Timer* _timer) const noexcept
     {
-        
-        constexpr auto Size = 3;
+        glColor3f(1.0f, 1.0f, 0.0f);
 
-        glColor3f(1.0, 1.0, 0.0);
-        glVertex2i(_position.m_value.m_X - Size, _position.m_value.m_Y - Size);
-        glVertex2i(_position.m_value.m_X - Size, _position.m_value.m_Y + Size);
-        glVertex2i(_position.m_value.m_X + Size, _position.m_value.m_Y + Size);
-        glVertex2i(_position.m_value.m_X + Size, _position.m_value.m_Y - Size);
+        // Apply Transformation Matrix to quad
+        glMatrixMode(GL_MODELVIEW);
+        glPushMatrix();
+        glLoadIdentity();
+        glTranslatef(_position.m_value.m_X, _position.m_value.m_Y, 0.0f);
+        glRotatef(0.0f, 0.0f, 0.0f, -1.0f);
+        glScalef(_scale.m_value.m_X, _scale.m_value.m_Y, 0.0f);
+
+        // Render a quad
+        glBegin(GL_TRIANGLES);
+        //glVertex2f(0.5f, 0.5f);
+        //glVertex2f(0.5f, -0.5f);
+        //glVertex2f(-0.5f, -0.5f);
+        //glVertex2f(-0.5f, 0.5f);
+
+        glVertex2f(0.0f, -0.5f);
+        glVertex2f(0.5f, 0.5f);
+        glVertex2f(-0.5f, 0.5f);
+        glEnd();
+
+        glPopMatrix();
     }
 };

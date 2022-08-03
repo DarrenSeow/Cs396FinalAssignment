@@ -6,11 +6,11 @@ struct Scale
         .m_pName = "Scale"
     };
 
-    xcore::vector2 m_Value;
+    xcore::vector2 m_value;
 };
 
 property_begin(Scale)
 {
-    property_var(m_Value)
+    property_var(m_value)
 }
 property_end()

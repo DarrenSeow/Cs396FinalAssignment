@@ -8,6 +8,7 @@
 #include <RenderingInfo.h>
 #include <Components.h>
 #include <Grid.h>
+#include <Events.h>
 #include <Systems.h>
 #include <random>
 #include <Game.h>
@@ -60,26 +61,21 @@ int main(int argc, char** argv)
     glutKeyboardFunc(
         [](unsigned char Key, int MouseX, int MouseY) noexcept
         {
-            s_Game.m_Keys.setKeyState(Key, true);
-            s_Game.m_MouseX = MouseX;
-            s_Game.m_MouseY = MouseY;
+            s_Game.KeyboardDownFunction(Key, MouseX, MouseY);
+
         }
     );
     glutKeyboardUpFunc(
         [](unsigned char Key, int MouseX, int MouseY) noexcept
         {
-            s_Game.m_Keys.setKeyState(Key, false);
-            s_Game.m_MouseX = MouseX;
-            s_Game.m_MouseY = MouseY;
+            s_Game.KeyboardUpFunction(Key, MouseX, MouseY);
+
         }
     );
     glutMouseFunc(
         [](int Button, int State, int MouseX, int MouseY) noexcept
         {
-            s_Game.m_MouseX = MouseX;
-            s_Game.m_MouseY = MouseY;
-            if (Button == GLUT_LEFT_BUTTON) s_Game.m_MouseLeft = (State == GLUT_DOWN);
-            else if (Button == GLUT_RIGHT_BUTTON) s_Game.m_MouseRight = (State == GLUT_DOWN);
+            s_Game.MouseFunction(Button, State, MouseX, MouseY);
         }
     );
 

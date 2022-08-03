@@ -40,6 +40,9 @@
     <Filter Include="Tools">
       <UniqueIdentifier>{384e6f1d-1968-4e12-89f1-7d198acf4106}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Events">
+      <UniqueIdentifier>{5c0b8e78-a2ee-413b-89cd-25e4da2980c2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\Settings\PropertyConfig.h">
@@ -313,6 +316,33 @@
     </ClInclude>
     <ClInclude Include="..\..\src\Helper.h">
       <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Events.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\OnKeyboardTriggeredEvent.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\PlayerTag.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\PlayerOnKeyDownSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\OnKeyboardTriggerUpEvent.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\PlayerOnKeyUpSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\UpdateMovementSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\InputSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\UpdateTimerSystem.h">
+      <Filter>Systems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

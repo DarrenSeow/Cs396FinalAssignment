@@ -48,6 +48,21 @@ struct Keys
         return (m_keys[static_cast<std::uint8_t>(x)] & static_cast<std::uint8_t>(KEY_TYPE::IS));
     }
 
+    const bool getKeyUp(char x) const noexcept
+    {
+        return (m_keys[static_cast<std::uint8_t>(x)] & static_cast<std::uint8_t>(KEY_TYPE::UP));
+    }
+
+    const bool getKeyDown(char x) const noexcept
+    {
+        return (m_keys[static_cast<std::uint8_t>(x)] & static_cast<std::uint8_t>(KEY_TYPE::DOWN));
+    }
+
+    const bool getKey(char x) const noexcept
+    {
+        return (m_keys[static_cast<std::uint8_t>(x)] & static_cast<std::uint8_t>(KEY_TYPE::IS));
+    }
+
     void FrameUpdate(void) noexcept
     {
         for (auto& K : m_keys)
