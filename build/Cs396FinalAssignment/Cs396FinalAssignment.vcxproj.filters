@@ -353,5 +353,8 @@
     <ClInclude Include="..\..\src\EnemyTags.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\Rotate.h">
+      <Filter>Components</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
