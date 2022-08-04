@@ -6,3 +6,6 @@
 #include <PlayerOnKeyUpSystem.h>
 #include <UpdateMovementSystem.h>
 #include <InputSystem.h>
+
+#include <UpdateTimerSystem.h>
+#include <RenderBulletSystem.h>

@@ -171,14 +171,15 @@
     <ClInclude Include="..\..\dependencies\xecs\src\xecs_system_mgr.h" />
     <ClInclude Include="..\..\dependencies\xecs\src\xecs_tools.h" />
     <ClInclude Include="..\..\dependencies\xecs\src\xecs_tools_bits.h" />
+    <ClInclude Include="..\..\src\Bullet.h" />
     <ClInclude Include="..\..\src\Components.h" />
+    <ClInclude Include="..\..\src\EnemyTags.h" />
     <ClInclude Include="..\..\src\Events.h" />
     <ClInclude Include="..\..\src\Game.h" />
     <ClInclude Include="..\..\src\GlutPrint.h" />
     <ClInclude Include="..\..\src\Grid.h" />
     <ClInclude Include="..\..\src\GridCells.h" />
     <ClInclude Include="..\..\src\Helper.h" />
-    <ClInclude Include="..\..\src\InputSystem.h" />
     <ClInclude Include="..\..\src\KeyInputs.h" />
     <ClInclude Include="..\..\src\OnKeyboardTriggeredEvent.h" />
     <ClInclude Include="..\..\src\OnKeyboardTriggerUpEvent.h" />
@@ -186,6 +187,7 @@
     <ClInclude Include="..\..\src\PlayerOnKeyUpSystem.h" />
     <ClInclude Include="..\..\src\PlayerTag.h" />
     <ClInclude Include="..\..\src\Position.h" />
+    <ClInclude Include="..\..\src\RenderBulletSystem.h" />
     <ClInclude Include="..\..\src\RenderingGridSystem.h" />
     <ClInclude Include="..\..\src\RenderingInfo.h" />
     <ClInclude Include="..\..\src\RenderingShipSystem.h" />
@@ -193,6 +195,7 @@
     <ClInclude Include="..\..\src\Scale.h" />
     <ClInclude Include="..\..\src\Settings\PropertyConfig.h" />
     <ClInclude Include="..\..\src\Settings\xcore_user_settings.h" />
+    <ClInclude Include="..\..\src\ShootingComponent.h" />
     <ClInclude Include="..\..\src\Systems.h" />
     <ClInclude Include="..\..\src\Timer.h" />
     <ClInclude Include="..\..\src\UpdateMovementSystem.h" />

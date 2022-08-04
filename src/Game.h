@@ -18,25 +18,42 @@ static struct Game
     void Initialize() noexcept
     {
         RenderingSystem::renderingInfo = &m_renderingInfo;
-        InputSystem::m_keys = &m_Keys;
-        m_GameMgr->RegisterComponents<Position, Scale, Velocity,Timer, GridCells,PlayerTag>();
 
-        m_GameMgr->RegisterGlobalEvents<OnKeyboardTriggeredEvent,OnKeyboardTriggerUpEvent>();
+
+        InputSystem::m_keys = &m_Keys;
+        m_GameMgr->RegisterComponents<
+            Position, 
+            Scale, 
+            Velocity,
+            Timer, 
+            GridCells,
+            PlayerTag,
+            ShootingComponent,
+            Bullet,
+            BasicEnemyTag,
+            ShootingEnemyTag>();
+
+        m_GameMgr->RegisterGlobalEvents<
+            OnKeyboardTriggeredEvent,
+            OnKeyboardTriggerUpEvent>();
         
         m_GameMgr->RegisterSystems<
-            //InputSystem,
             PlayerOnKeyDownSystem,
             PlayerOnKeyUpSystem,
             UpdateMovementSystem,
+            UpdateTimerSystem,
+            ShootingTimerSystem,
+            BulletDestroySystem,
             RenderingSystem,
             RenderingGridSystem, 
-            RenderingShipSystem>();
+            RenderingShipSystem,
+            RenderBulletSystem>();
        
     }
     void InitializeGame() noexcept
     {
-        m_GameMgr->getOrCreateArchetype< Position, Velocity, Scale,Timer,GridCells,PlayerTag>()
-            .CreateEntities(1, [&](Position& position, Velocity& velocity, Scale& _scale, Timer& timer, GridCells& cells, PlayerTag _player) noexcept
+        m_GameMgr->getOrCreateArchetype< Position, Velocity, Scale,Timer,GridCells,PlayerTag,ShootingComponent>()
+            .CreateEntities(1, [&](Position& position, Velocity& velocity, Scale& _scale, Timer& timer, GridCells& cells, ShootingComponent& _shootingComp) noexcept
                 {
                     position.m_value = xcore::vector2{ static_cast<float>(std::rand() % m_renderingInfo.m_width)
                                                          , static_cast<float>(std::rand() % m_renderingInfo.m_height)
@@ -47,11 +64,24 @@ static struct Game
                     velocity.m_value = 0;
 
                     _scale.m_value = 15;
-                    timer.m_value = 0.5f;
-                    _player.m_canShoot = true;
+                    timer.m_value = 2.0f;
+                    _shootingComp.m_canShoot = true;
                 });
         m_GameMgr->getOrCreateArchetype< Position, Velocity,Scale, Timer, GridCells>()
             .CreateEntities(1, [&](Position& position, Velocity& velocity, Scale& _scale,Timer& timer, GridCells& cells) noexcept
+                {
+                    position.m_value = xcore::vector2{ static_cast<float>(std::rand() % m_renderingInfo.m_width)
+                                                         , static_cast<float>(std::rand() % m_renderingInfo.m_height)
+                    };
+
+                    cells = grid::ComputeGridCellFromWorldPosition(position.m_value);
+
+                    velocity.m_value = 0;
+                    _scale.m_value = 3;
+                    timer.m_value = std::rand() / static_cast<float>(RAND_MAX) * 8;
+                });
+        m_GameMgr->getOrCreateArchetype<Timer>()
+            .CreateEntities(1, [&](Position& position, Velocity& velocity, Scale& _scale, Timer& timer, GridCells& cells) noexcept
                 {
                     position.m_value = xcore::vector2{ static_cast<float>(std::rand() % m_renderingInfo.m_width)
                                                          , static_cast<float>(std::rand() % m_renderingInfo.m_height)

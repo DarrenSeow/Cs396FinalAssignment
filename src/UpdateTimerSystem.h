@@ -12,39 +12,80 @@ struct UpdateTimerSystem : xecs::system::instance
         < update
         >;
 
+   using query = std::tuple
+       <
+       xecs::query::must<Timer>
+       >;
 
-    __inline constexpr
-        void operator()(timer& Timer) const noexcept
+    __inline void OnGameStart() noexcept
     {
-        Timer.m_Value -= 0.01f;
+        m_timerQuery.AddQueryFromTuple<query>();
+    }
+    __inline void OnUpdate() noexcept
+    {
+        Foreach(Search(m_timerQuery),
+            [&](Timer& _timer)
+            {
+                if (_timer.m_value > 0.0)
+                    _timer.m_value -= 0.01f;
+                else
+                    _timer.m_value = 0.0f;
+            });
 
         SendEventFrom<update>(this);
-        //if (Timer.m_Value <= 0)
-        //{
-        //    //void)AddOrRemoveComponents<std::tuple<>, std::tuple<timer>>(Entity);
-        //}
     }
+
+
+    xecs::query::instance m_timerQuery{};
 };
 
-struct PlayerShootingTimerSystem : xecs::system::instance
+struct ShootingTimerSystem : xecs::system::instance
 {
     constexpr static auto typedef_v =
         xecs::system::type::child_update<UpdateTimerSystem, UpdateTimerSystem::update>
     {
-        .m_pName = "RenderingShipSystem"
+        .m_pName = "ShootingTimerSystem"
+    };
+
+    //using query = std::tuple
+    //    <
+    //    xecs::query::must<PlayerTag>
+    //    >;
+
+    static constexpr auto shootingDelayTimer = 0.2f;
+
+    void operator()(Timer& _timer, ShootingComponent& _shootingComp) const noexcept
+    {
+       if(!_shootingComp.m_canShoot && _timer.m_value <= 0.0f)
+       {
+           _shootingComp.m_canShoot = true;
+           _timer.m_value = shootingDelayTimer;
+       }
+    }
+};
+
+struct BulletDestroySystem : xecs::system::instance 
+{
+    constexpr static auto typedef_v =
+        xecs::system::type::child_update<UpdateTimerSystem, UpdateTimerSystem::update>
+    {
+        .m_pName = "BulletDestroySystem"
     };
 
     using query = std::tuple
         <
-        xecs::query::must<PlayerTag>
+        xecs::query::must<Bullet>
         >;
 
-    constexpr auto shootingDelayTimer = 2.0f;
-    void operator()(const Timer& _timer) const noexcept
+    
+    void operator()(entity& _entity,Timer& _timer) const noexcept
     {
-       if(_timer <= 0.0f)
-       {
-           _timer = shootingDelayTimer;
-       }
+        if (_timer.m_value <= 0.0f)
+        {           
+            DeleteEntity(_entity);
+        }
     }
 };
+
+
+

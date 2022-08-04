@@ -11,12 +11,18 @@ struct PlayerOnKeyDownSystem : xecs::system::instance
 	void OnGameStart() noexcept
 	{
 		m_playerQuery.m_Must.AddFromComponents<PlayerTag>();
-		
+
+		m_bulletPrefab = CreatePrefab<Position, Velocity,Scale, Bullet, Timer, GridCells>([&](Timer& _timer) noexcept
+			{
+				_timer.m_value = bulletLiveDuration;
+			});
 	}
+
+
 
 	void OnEvent(const unsigned char _key) noexcept
 	{
-		Foreach(Search(m_playerQuery), [&](Velocity& _velocity,Timer* _timer)
+		Foreach(Search(m_playerQuery), [&](const entity& _entity,Velocity& _velocity,ShootingComponent& _shootingComp,Position& _position)
 			{
 				switch(_key)
 				{
@@ -33,15 +39,30 @@ struct PlayerOnKeyDownSystem : xecs::system::instance
 						_velocity.m_value.m_X = 1;
 						break;
 					case ' ':
-						if (_timer->m_value <= 0)
-							std::cout << "help" << std::endl;
+						if (_shootingComp.m_canShoot)
+						{
+							_shootingComp.m_canShoot = false;
+
+							CreatePrefabInstance(1, m_bulletPrefab, 
+								[&](entity& _entity,Position& _pos, Velocity& _vel, Bullet& _bullet, GridCells& _cell,Scale& _scale) noexcept
+								{
+									
+									_vel.m_value.m_Y =  -2.0f;
+									_pos.m_value = _position.m_value + _vel.m_value;
+
+									_bullet.m_shipOwner = _entity;
+									_scale.m_value.m_X = 5.0f;
+									_scale.m_value.m_Y = 8.0f;
+									_cell = grid::ComputeGridCellFromWorldPosition(_pos.m_value);
+								});
+						}
 						break;
 				}
 				
 			});
 
 	}
-
-
+	static constexpr auto bulletLiveDuration = 5.0f;
+	xecs::prefab::guid m_bulletPrefab{};
 	xecs::query::instance m_playerQuery{};
 };

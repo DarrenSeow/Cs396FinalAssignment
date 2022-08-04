@@ -338,11 +338,20 @@
     <ClInclude Include="..\..\src\UpdateMovementSystem.h">
       <Filter>Systems</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\InputSystem.h">
-      <Filter>Systems</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\UpdateTimerSystem.h">
       <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ShootingComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Bullet.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\RenderBulletSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\EnemyTags.h">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

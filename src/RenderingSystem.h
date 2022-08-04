@@ -30,17 +30,7 @@ struct RenderingSystem : xecs::system::instance
     __inline
         void OnUpdate(void) noexcept
     {
-
-        //
-        // Let all the system that depends on me
-        //
-        SendEventFrom<update>(this);
-       // std::cout << x << std::endl;
-        //
-        // Page Flip
-        //
-//        glFlush();
-        
+        SendEventFrom<update>(this);        
     }
     __inline void OnPostUpdate(void) noexcept
     {
