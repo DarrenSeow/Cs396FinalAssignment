@@ -34,7 +34,7 @@ int main(int argc, char** argv)
     s_Game.m_GameMgr = std::make_unique<xecs::game_mgr::instance>();
     s_Game.Initialize();
     s_Game.InitializeGame();
-    glutInitWindowSize(s_Game.m_renderingInfo.m_width, s_Game.m_renderingInfo.m_height);
+    glutInitWindowSize(renderingInfo.m_width, renderingInfo.m_height);
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
     glutCreateWindow(xcore::get().m_pAppName);
@@ -53,8 +53,8 @@ int main(int argc, char** argv)
     glutReshapeFunc(
         [](int w, int h) noexcept
         {
-            s_Game.m_renderingInfo.m_width = w;
-            s_Game.m_renderingInfo.m_height = h;
+            renderingInfo.m_width = w;
+            renderingInfo.m_height = h;
         }
     );
 

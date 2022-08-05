@@ -172,7 +172,9 @@
     <ClInclude Include="..\..\dependencies\xecs\src\xecs_tools.h" />
     <ClInclude Include="..\..\dependencies\xecs\src\xecs_tools_bits.h" />
     <ClInclude Include="..\..\src\Bullet.h" />
+    <ClInclude Include="..\..\src\Color.h" />
     <ClInclude Include="..\..\src\Components.h" />
+    <ClInclude Include="..\..\src\DestroySystems.h" />
     <ClInclude Include="..\..\src\EnemyTags.h" />
     <ClInclude Include="..\..\src\Events.h" />
     <ClInclude Include="..\..\src\Game.h" />
@@ -197,6 +199,7 @@
     <ClInclude Include="..\..\src\Settings\PropertyConfig.h" />
     <ClInclude Include="..\..\src\Settings\xcore_user_settings.h" />
     <ClInclude Include="..\..\src\ShootingComponent.h" />
+    <ClInclude Include="..\..\src\SpawnEnemySystem.h" />
     <ClInclude Include="..\..\src\Systems.h" />
     <ClInclude Include="..\..\src\Timer.h" />
     <ClInclude Include="..\..\src\UpdateMovementSystem.h" />

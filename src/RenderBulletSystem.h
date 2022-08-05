@@ -13,9 +13,9 @@ struct RenderBulletSystem : xecs::system::instance
         xecs::query::must<Bullet>
         >;
 
-    void operator()(const Position& _position, const Scale& _scale) const noexcept
+    void operator()(const Position& _position, const Scale& _scale,const Color& _color) const noexcept
     {
-        glColor3f(1.0f, 0.0f, 0.0f);
+        glColor3f(_color.m_value.m_X,_color.m_value.m_Y,_color.m_value.m_Z);
 
         // Apply Transformation Matrix to quad
         glMatrixMode(GL_MODELVIEW);

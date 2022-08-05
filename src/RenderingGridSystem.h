@@ -16,7 +16,7 @@ struct RenderingGridSystem : xecs::system::instance
         void operator()(const GridCells& GridCell, const xecs::component::share_filter& ShareFilter) noexcept
     {
         // Hide nodes where there are not entities
-        if constexpr (false)
+        //if constexpr (false)
         {
             int nEntities = 0;
             for (auto& ArchetypeCell : ShareFilter.m_lEntries)

@@ -12,14 +12,14 @@ struct PlayerOnKeyDownSystem : xecs::system::instance
 	{
 		m_playerQuery.m_Must.AddFromComponents<PlayerTag>();
 
-		m_bulletPrefab = CreatePrefab<Position, Velocity,Scale, Bullet, Timer, GridCells>([&](Timer& _timer) noexcept
+		m_bulletPrefab = CreatePrefab<Position, Velocity,Scale, Bullet, GridCells,Color>([&](Color& _color) noexcept
 			{
-				_timer.m_value = bulletLiveDuration;
+				_color.m_value = 1.0f;
 			});
 	}
 
 
-
+	static constexpr auto speed = 5;
 	void OnEvent(const unsigned char _key) noexcept
 	{
 		Foreach(Search(m_playerQuery), [&](const entity& _entity,Velocity& _velocity,ShootingComponent& _shootingComp,Position& _position)
@@ -27,16 +27,16 @@ struct PlayerOnKeyDownSystem : xecs::system::instance
 				switch(_key)
 				{
 					case 'w':
-						_velocity.m_value.m_Y = -1;
+						_velocity.m_value.m_Y = -speed;
 						break;
 					case 's':
-						_velocity.m_value.m_Y = 1;
+						_velocity.m_value.m_Y = speed;
 						break;
 					case 'a':
-						_velocity.m_value.m_X = -1;
+						_velocity.m_value.m_X = -speed;
 						break;
 					case 'd':
-						_velocity.m_value.m_X = 1;
+						_velocity.m_value.m_X = speed;
 						break;
 					case ' ':
 						if (_shootingComp.m_canShoot)
@@ -44,10 +44,10 @@ struct PlayerOnKeyDownSystem : xecs::system::instance
 							_shootingComp.m_canShoot = false;
 
 							CreatePrefabInstance(1, m_bulletPrefab, 
-								[&](entity& _entity,Position& _pos, Velocity& _vel, Bullet& _bullet, GridCells& _cell,Scale& _scale) noexcept
+								[&](Position& _pos, Velocity& _vel, Bullet& _bullet, GridCells& _cell,Scale& _scale) noexcept
 								{
 									
-									_vel.m_value.m_Y =  -2.0f;
+									_vel.m_value.m_Y =  -10.0f;
 									_pos.m_value = _position.m_value + _vel.m_value;
 
 									_bullet.m_shipOwner = _entity;
@@ -62,7 +62,6 @@ struct PlayerOnKeyDownSystem : xecs::system::instance
 			});
 
 	}
-	static constexpr auto bulletLiveDuration = 5.0f;
 	xecs::prefab::guid m_bulletPrefab{};
 	xecs::query::instance m_playerQuery{};
 };

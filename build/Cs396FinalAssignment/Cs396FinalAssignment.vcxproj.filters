@@ -356,5 +356,14 @@
     <ClInclude Include="..\..\src\Rotate.h">
       <Filter>Components</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\Color.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\SpawnEnemySystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\DestroySystems.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
