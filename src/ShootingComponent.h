@@ -8,3 +8,4 @@ struct ShootingComponent
 
     bool m_canShoot;
 };
+

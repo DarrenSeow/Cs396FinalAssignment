@@ -11,3 +11,5 @@
 #include <RenderBulletSystem.h>
 #include <SpawnEnemySystem.h>
 #include <DestroySystems.h>
+#include <ScoreSystem.h>
+#include <GameplaySystem.h>

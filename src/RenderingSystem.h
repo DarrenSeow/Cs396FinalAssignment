@@ -24,7 +24,7 @@ struct RenderingSystem : xecs::system::instance
         glLoadIdentity();
         glOrtho(0, renderingInfo.m_width, 0, renderingInfo.m_height, -1, 1);
         glScalef(1, -1, 1);
-        glTranslatef(0, -renderingInfo.m_height, 0);
+        glTranslatef(0, -static_cast<float>(renderingInfo.m_height), 0);
 
     }
     __inline

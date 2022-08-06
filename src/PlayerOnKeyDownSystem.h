@@ -12,7 +12,7 @@ struct PlayerOnKeyDownSystem : xecs::system::instance
 	{
 		m_playerQuery.m_Must.AddFromComponents<PlayerTag>();
 
-		m_bulletPrefab = CreatePrefab<Position, Velocity,Scale, Bullet, GridCells,Color>([&](Color& _color) noexcept
+		m_bulletPrefab = CreatePrefab<Position, Velocity,Scale, Bullet, GridCells,Color,PlayerBulletTag>([&](Color& _color) noexcept
 			{
 				_color.m_value = 1.0f;
 			});

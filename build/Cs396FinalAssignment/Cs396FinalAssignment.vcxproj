@@ -178,6 +178,7 @@
     <ClInclude Include="..\..\src\EnemyTags.h" />
     <ClInclude Include="..\..\src\Events.h" />
     <ClInclude Include="..\..\src\Game.h" />
+    <ClInclude Include="..\..\src\GameplaySystem.h" />
     <ClInclude Include="..\..\src\GlutPrint.h" />
     <ClInclude Include="..\..\src\Grid.h" />
     <ClInclude Include="..\..\src\GridCells.h" />
@@ -196,6 +197,7 @@
     <ClInclude Include="..\..\src\RenderingSystem.h" />
     <ClInclude Include="..\..\src\Rotate.h" />
     <ClInclude Include="..\..\src\Scale.h" />
+    <ClInclude Include="..\..\src\ScoreSystem.h" />
     <ClInclude Include="..\..\src\Settings\PropertyConfig.h" />
     <ClInclude Include="..\..\src\Settings\xcore_user_settings.h" />
     <ClInclude Include="..\..\src\ShootingComponent.h" />

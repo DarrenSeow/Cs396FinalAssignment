@@ -32,10 +32,10 @@ struct RenderingGridSystem : xecs::system::instance
 
         glBegin(GL_QUADS);
         glColor3f(0.25f, 0.25f, 0.25f);
-        glVertex2i(X - SizeX, Y - SizeY);
-        glVertex2i(X - SizeX, Y + SizeY);
-        glVertex2i(X + SizeX, Y + SizeY);
-        glVertex2i(X + SizeX, Y - SizeY);
+        glVertex2f(X - SizeX, Y - SizeY);
+        glVertex2f(X - SizeX, Y + SizeY);
+        glVertex2f(X + SizeX, Y + SizeY);
+        glVertex2f(X + SizeX, Y - SizeY);
         glEnd();
 
         enum print
@@ -54,7 +54,7 @@ struct RenderingGridSystem : xecs::system::instance
         case print::ARCHETYPES:
         {
             glColor3f(1.0f, 1.0f, 1.0f);
-            GlutPrint(X, Y - 15, "%d", ShareFilter.m_lEntries.size());
+            GlutPrint(static_cast<int>(X), static_cast<int>(Y) - 15, "%d", ShareFilter.m_lEntries.size());
             break;
         }
         case print::FAMILIES:
@@ -64,7 +64,7 @@ struct RenderingGridSystem : xecs::system::instance
                 nFamilies += static_cast<int>(ArchetypeCell.m_lFamilies.size());
 
             glColor3f(1.0f, 1.0f, 1.0f);
-            GlutPrint(X, Y - 15, "%d", nFamilies);
+            GlutPrint(static_cast<int>(X), static_cast<int>(Y) - 15, "%d", nFamilies);
             break;
         }
         case print::ENTITIES:
@@ -75,13 +75,13 @@ struct RenderingGridSystem : xecs::system::instance
                     nEntities += static_cast<int>(Family->m_DefaultPool.Size());
 
             glColor3f(1.0f, 1.0f, 1.0f);
-            GlutPrint(X, Y - 15, "%d", nEntities);
+            GlutPrint(static_cast<int>(X), static_cast<int>(Y) - 15, "%d", nEntities);
             break;
         }
         case print::GRIDCELL_XY:
         {
             glColor3f(1.0f, 1.0f, 1.0f);
-            GlutPrint(X - 23, Y - 15, "%d,%d", GridCell.m_X, GridCell.m_Y);
+            GlutPrint(static_cast<int>(X) - 23, static_cast<int>(Y) - 15, "%d,%d", GridCell.m_X, GridCell.m_Y);
             break;
         }
         }

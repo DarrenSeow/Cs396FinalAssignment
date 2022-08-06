@@ -96,13 +96,13 @@ struct UpdateShootingEnemySystem : xecs::system::instance
 
 
 
-    static constexpr float shootInterval = 0.7f;
+    static constexpr float shootInterval = 0.5f;
     using query = std::tuple <xecs::query::must<ShootingEnemyTag>>;
 
     __inline void OnGameStart()
     {
         m_playerQuery.m_Must.AddFromComponents<PlayerTag>();
-        m_bulletPrefab = CreatePrefab<Position, Velocity, Scale, Bullet, GridCells, Color>([&](Color& _color) noexcept
+        m_bulletPrefab = CreatePrefab<Position, Velocity, Scale, Bullet, GridCells, Color,EnemyBulletTag>([&](Color& _color) noexcept
             {
                 _color.m_value = { 1.0f,0.5f,0.0f };
             });
@@ -116,7 +116,6 @@ struct UpdateShootingEnemySystem : xecs::system::instance
         {
             _shootingComponent.m_canShoot = false;
             _timer.m_value = shootInterval;
-            std::cout << "pew pew" << std::endl;
             Foreach(Search(m_playerQuery), [&](const Position& _Position)
                 {
                     auto direction = _Position.m_value - _position.m_value;

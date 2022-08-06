@@ -35,16 +35,16 @@ struct SpawnBasicEnemySystem : xecs::system::instance
             switch (std::rand() % 4)
             {
             case 0:
-                SpawnHorizontalDownLineOfEnemy(15);
+                SpawnHorizontalDownLineOfEnemy(std::rand() % 10 + 5);
                 break;
             case 1:
-                SpawnHorizontalUpLineOfEnemy(15);
+                SpawnHorizontalUpLineOfEnemy(std::rand() % 3 + 5);
                 break;
             case 2:
-                SpawnVerticalRightLineOfEnemy(10);
+                SpawnVerticalRightLineOfEnemy(std::rand() % 3 + 5);
                 break;
             case 3:
-                SpawnVerticalLeftLineOfEnemy(10);
+                SpawnVerticalLeftLineOfEnemy(std::rand() % 3 + 5);
                 break;
             }
         }
@@ -137,7 +137,7 @@ struct SpawnShootingEnemySystem : xecs::system::instance
             [&](Position& position, Velocity& velocity, Scale& _scale, GridCells& cells, Color& _color, Rotate& _rotate, ShootingComponent& _shootingComponent,Timer& _timer) noexcept
             {
                 _shootingComponent.m_canShoot = false;
-                _timer.m_value = 0.7f;
+                _timer.m_value = 0.2f;
                 _color.m_value = { 1.0f,0.0f,1.0f };
                 _scale.m_value = 15;
             });

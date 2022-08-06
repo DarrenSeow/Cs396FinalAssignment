@@ -1,6 +1,7 @@
 #pragma once
 
 
+
 static struct Game
 {
     using game_mgr_uptr = std::unique_ptr<xecs::game_mgr::instance>;
@@ -14,13 +15,10 @@ static struct Game
     Keys            m_Keys{};
     int             m_DisplayGridInfo{ 0 };
 
-
     void Initialize() noexcept
     {
-       // RenderingSystem::renderingInfo = &m_renderingInfo;
+       
 
-
-        InputSystem::m_keys = &m_Keys;
         m_GameMgr->RegisterComponents<
             Position, 
             Scale, 
@@ -32,8 +30,12 @@ static struct Game
             Bullet,
             BasicEnemyTag,
             ShootingEnemyTag,
+            EnemyBulletTag,
+            PlayerBulletTag,
             Color,
-        Rotate>();
+            Rotate,
+            Score,
+            Gameplay>();
 
         m_GameMgr->RegisterGlobalEvents<
             OnKeyboardTriggeredEvent,
@@ -42,21 +44,24 @@ static struct Game
         m_GameMgr->RegisterSystems<
             PlayerOnKeyDownSystem,
             PlayerOnKeyUpSystem,
-            UpdateMovementSystem,            
+            UpdateMovementSystem,  
+            PlayerMovementSystem,
             UpdateTimerSystem,
             ShootingTimerSystem,
             UpdateShootingEnemySystem,
             BulletDestroyOnTimerSystem,
+            
             DestroyObjectOutOfScreenSystem,
+            EnemyCollidedPlayerSystem,
+            PlayerBulletCollisionSystem,
             SpawnShootingEnemySystem,
             SpawnBasicEnemySystem,
-
             RenderingSystem,
-            //RenderingGridSystem, 
             RenderingShipSystem,
-            RenderBulletSystem
+            RenderBulletSystem,
+            ScoreSystem,
+            GameplaySystem
         >();
-       
     }
     void InitializeGame() noexcept
     {
@@ -92,8 +97,12 @@ static struct Game
                 {
                     _timer.m_value = 5.0f;
                 });
-
-
+        m_GameMgr->getOrCreateArchetype<Score, Gameplay>().CreateEntities(1, [&](Score& _score, Gameplay& _playerAlive)
+        {
+            _score.m_value = 0;
+            _playerAlive.m_value = true;
+        });
+        
     }
     void KeyboardDownFunction(unsigned char _key, int _mouseX, int _mouseY) noexcept
     {
